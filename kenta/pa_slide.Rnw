@@ -1,0 +1,622 @@
+\documentclass[dvipdfmx]{beamer}
+\usetheme{Boadilla}
+%\usepackage{helvet}
+\usepackage{float}
+\usepackage{standalone}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{dcolumn} % to align numeric values at decimal mark in stargazer
+%\usepackage{geometry}
+%\geometry{a4paper,portrait,margin=1in} % graph extended to the defined width. graph size need to be defined in global environment
+\AtBeginSection[] % show highlighted table of contents for each section
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\title{Analysis report}
+\subtitle{Longitudinal change of physical activity engagement and neighborhood environment among rural Japanese older adults}
+\author{Kenta Okuyama\inst{1,2}}
+\institute{\inst{1}Center for Primary Health Care Research \\
+Lund University\and \inst{2}Center for Community-based Healthcare Research and Education \\
+Shimane University}
+\date{\today}
+\logo{
+	\includegraphics[height=1.0cm]{/home/kenta/Dropbox/researchProjects/research_proposal/logo/lund_RGB.png}~
+	%\includegraphics[height=1.0cm]{/home/kenta/Dropbox/Logo/logo_shimaneUniv.png}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{frame}
+	\titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frame{Table of Contents}
+	\tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\begin{frame}
+	\frametitle{Introduction}
+	\begin{itemize}
+		\item Physical function decline could increase the risks of numerous chronic diseases among older adults.
+		\item \textbf{Maintaining regular physical activity} is important to prevent physical function decline.
+		\item Numerous research investigated the association between neighborhood factors and physical activity among older adults.
+		\item However, what environmental intervention should be efffective is unclear due to the \textbf{limited longitudinal studies}. 
+		\item In addition, \textbf{very few studies have been conducted in rural settings where residents are under higher risk of chronic diseases in general}.
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Introduction}
+	\begin{block}{Objective}
+		The primary objective of this study is \textbf{to investigate neighborhood environment factors associated with longitudinal change of physical activity engagement among rural Japanese older adults}.
+	\end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Methods}
+\subsection{Study areas and subjects}
+\begin{frame}
+	\frametitle{Study areas and subjects}
+	\begin{columns}
+%%% left column	
+		\column{0.5\textwidth}
+		\begin{itemize}
+			\item This study utilized Shimane CoHRE cohort data from 2010-2018.
+			\item The study areas were \textbf{3 cities (Unnan city, Onan town, Oki Island)} in Shimane prefecture, Japan.
+			\item The study subjects were \textbf{those who $\ge$60 years} and participated in annual health checkups between 2010-2018.
+		\end{itemize}
+%%% right column
+		\column{0.5\textwidth}
+		\begin{figure}[H]
+			\centering
+			\includegraphics [width=\textwidth] {/home/kenta/Dropbox/researchProjects/sarco_cohre/poster/field.jpg}
+			\caption{Study areas: 3 cities in Shimane}
+		\end{figure}	
+	\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Outcome}
+\begin{frame}
+	\frametitle{Outcome}
+	\begin{itemize}
+		\item Engagement of regular physical activity was defined by \textbf{yes/no} answer to the following question at health checkups.
+		\item "\textbf{\textit{Do you engage in physical activity which is higher or equivalent intensity to walking $\geq$60 min per day?}}"
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exposure}
+\begin{frame}
+	\frametitle{Exposure}
+	\begin{itemize}
+		\item \textbf{5} neighborhood environment variables were measured by geographic information system (GIS)
+			\begin{enumerate}
+				\item \textbf{Mean land slope}, degree in angular unit.
+				\item \textbf{Distance to Kominkan (Community center)}, in meters.
+				\item \textbf{Bus stop density}, number of bus stops.
+				\item \textbf{Intersection density}, number of intersections with 3 or more legs.
+				\item \textbf{Residential density}, number of housings.
+			\end{enumerate}
+		\item Distance to Kominkan was measured from each subject's residential point to a community center \textbf{within a community area where a subject resides}. 
+		\item Other variables were measured \textbf{within 1000m street network buffer} from each subject's residential point.
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exposure - Hypothesis}
+\begin{frame}
+	\frametitle{Exposure - Hypothesis}
+	Why do you examin these envrionment variables?
+	\begin{itemize}
+		\item Those living in \textbf{hilly neighborhoods (high land slope) would have higher risk} of becoming physically inactive.
+		\item Those living \textbf{far from a community center would have higher risk} of becoming physically inactive.
+	\end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Covariates}
+\begin{frame}
+	\frametitle{Covariates}
+	\begin{itemize}
+		\item Demographic variables such as age, gender, as well as lifestyle habits such as smoking and drinking were included in analyses.
+			\begin{itemize}
+				\item \textbf{Demographic:} age, gender, city of residence
+				\item \textbf{Life style:} smoking, drinking, driving license
+				\item \textbf{Comorbidities:} BMI, musculoskeletal disorders
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Statistical analysis}
+\begin{frame}
+	\frametitle{Statistical analysis}
+	\begin{itemize}
+		\item Cox proportional hazard model was applied in the following steps.
+			\begin{enumerate}
+				\item Included the subjects who were \textbf{physically active (answered "Yes" to the question) at the first year of participation} in the study between 2010-2018.
+				\item Censored those who did not developed event (answered "No" to the question) untill the last time point 2018, or stopped participating before 2018. 
+				\item Calculated person year for each subject with event and censored subject. 
+				\item Applied Kaplan Meier survival curve to show the trend by an exposure of interest (i.e. land slope and distance to a community center).
+				\item Applied cox model by crude and full model adjusting for all covariates.
+			\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results}
+\subsection{Descriptive analysis}
+\begin{frame}
+	\frametitle{Number of events}
+		\begin{itemize}
+			\item There were \textbf{2102 subjects included} in the analyses.
+			\item \textbf{914 events} were identified during the mean follow-up time of 2.7 years.
+		\item The number of baseline subjects by year is as follows:
+	\end{itemize}
+
+%%%%%%%%%%%%%%%% initial setup - data import and clean
+<<initial setup, include=FALSE,warning=FALSE,message=FALSE>>=
+### import library
+knitr::opts_chunk$set(echo=FALSE,warning = FALSE, error = FALSE, message = FALSE,fig.pos='H',fig.height=3.5,results='hold')
+library(knitr)
+library(tidyverse)
+library(tableone)
+library(gtools)
+library(labelled)
+library(kableExtra)
+library(survival)
+library(survminer)
+### import data
+dir <- "/run/media/kenta/BACKUP/takeover/cohre/data/bytopic" 
+basic <- read_rds(paste(dir, "basic.rds",sep="/")) %>%
+	select(-examdate)
+baseline <- read_rds(paste(dir, "baseline.rds",sep="/")) %>%
+	select(-examdate)
+license <- read_rds(paste(dir, "license.rds",sep="/")) %>%
+	select(-examdate)
+ses <- read_rds(paste(dir, "ses.rds",sep="/"))%>%
+	select(ID,year,educ,educ2,educ_year)
+inter <- read_rds(paste(dir, "interDen2012.rds",sep="/")) %>%
+	select(-year)
+bus <- read_rds(paste(dir, "busDen2010.rds",sep="/")) %>%
+	select(-year)
+slope <- read_rds(paste(dir, "slopeDen2009.rds",sep="/")) %>%
+	select(-year)
+komin <- read_rds(paste(dir, "kominDis2015.rds",sep="/"))
+gis <- read_rds(paste(dir, "gis.rds",sep="/"))
+
+### merge, filter data
+df <- basic %>%
+	left_join(baseline,by=c("ID","year")) %>%
+	left_join(license, by=c("ID","year")) %>%
+	left_join(inter, by=c("ID")) %>%
+	left_join(bus, by=c("ID")) %>%
+	left_join(slope, by=c("ID")) %>%
+	left_join(komin, by=c("ID")) %>%
+	left_join(gis, by=c("ID")) %>%
+	mutate(year=as.numeric(as.character(year))) %>%
+	filter(year>=2010 & age>=60) 
+### clean variable 
+df2 <- df %>%
+	mutate(
+	       slope1000_bi = quantcut(meanSlope_1000, q=2, na.rm=T),
+	       slope1000_ter = quantcut(meanSlope_1000, q=3, na.rm=T),
+	       slope1000_qua = quantcut(meanSlope_1000, q=4, na.rm=T),
+	       kominDis_bi = quantcut(komoinDis, q=2, na.rm=T),
+	       kominDis_ter = quantcut(komoinDis, q=3, na.rm=T),
+	       kominDis_qua = quantcut(komoinDis, q=4, na.rm=T),
+	       age_cat = case_when(age<65 ~ 1,
+														 age<70 ~ 2,
+														 age<75 ~ 3,
+														 age<80 ~ 4,
+														 age<85 ~ 5,
+														 age<90 ~ 6,
+														 age<95 ~ 7),
+	       age_cat2 = case_when(age<70 ~ 1,
+															age<80 ~ 2,
+															age>=80 ~ 3),
+				 age_cat3 = case_when(age<75 ~ 1,
+															age<85 ~ 2,
+															age>=85 ~ 3),
+	       license2 = case_when(license==1 | license==2 ~ 1,
+															license==3 ~ 0),
+	       bone = case_when(bone_diag==1 ~ 0,
+													bone_diag==2 | bone_diag==3 ~ 1),
+				 lownut = case_when(BMI<21.5 ~ 1,
+														BMI>=21.5 ~ 0),
+				 unweight = case_when(BMI<18.5 ~ 1,
+															BMI>=18.5 ~ 0),
+				 bmi_cat = case_when(BMI<18.5 ~ 1,
+														 BMI>=18.5 &  BMI<21.5 ~ 0,
+													 	 BMI>=21.5 & BMI<23 ~ 2,
+														 BMI>=23 & BMI<25 ~3,
+														 BMI>=25 ~ 4),
+	       hbp_ob = case_when(hbp_med==1 | SBP>=140 | DBP>=90 ~ 1,
+														hbp_med==2 & SBP<140 & DBP<90 ~ 0),
+	       diab_ob = case_when(diab_med==1 | HbA1c>=6.5 ~ 1,
+														 diab_med==2 & HbA1c<6.5 ~0)
+	       ) %>%
+	set_value_labels(gender=c("Male"=1,"Female"=2),age_cat=c("60-64"=1,"65-69"=2,"70-74"=3,"75-79"=4,"80-84"=5,"85-89"=6,"90-94"=7),age_cat2=c("60-69"=1,"70-79"=2,"80+"=3),age_cat3=c("65-74"=1,"75-84"=2,"85+"=3),pa=c("Yes"=1,"No"=2),exercise=c("Yes"=1,"No"=2),city=c("Unnan"=1,"Izumo"=2,"Oki"=3,"Onan"=4),license2=c("Yes"=1,"No"=0),cvd=c("Yes"=1,"No"=2),stroke=c("Yes"=1,"No"=2),smoke=c("Yes"=1,"No"=2),drink=c("Yes"=1,"Occasionally"=2,"No"=3),bone=c("Yes"=1,"No"=0),lownut=c("Yes"=1,"No"=0),unweight=c("Yes"=1,"No"=0),bmi_cat=c("Normal"=0,"Underweight"=1,"Obesity1"=2,"Obesity2_4"=3),hbp_ob=c("Yes"=1,"No"=0),diab_ob=c("Yes"=1,"No"=0)
+			 ) %>%
+	mutate_at(vars(gender,age_cat,age_cat2,age_cat3,pa,exercise,city,license2,cvd,stroke,smoke,drink,bone,lownut,unweight,bmi_cat,hbp_ob,diab_ob), to_factor)
+
+# filter subjects with pa at t0 - only select ID
+paBase <- df2 %>%
+	group_by(ID) %>%
+	arrange(year) %>%
+	filter(row_number()==1 & pa=="Yes") 
+# filter subjects with event = no pa at the first time appeared in the long data
+paEvent <- df2 %>%
+	group_by(ID) %>%
+	arrange(year) %>%
+	filter(pa=="No") %>%
+	filter(row_number()==1) %>%
+	mutate(yearEvent = year,
+				 paEvent = pa) %>%
+	select(ID,yearEvent,paEvent)
+# filter subjects for the last year follow-up
+paLast <- df2 %>%
+	group_by(ID) %>%
+	arrange(year) %>%
+	slice(n()) %>%
+	mutate(yearLast = year) %>%
+	select(ID, yearLast)
+# merge all data to calculate yearPerson 
+paCox <- paBase %>%
+	left_join(paEvent, by =c("ID")) %>%
+	left_join(paLast, by=c("ID")) %>%
+	mutate(
+				 paEvent = case_when(paEvent=="No" ~ 1,
+														 is.na(paEvent) ~ 0),
+				 yearPerson = case_when(paEvent==1 ~ yearEvent - year,
+																paEvent==0 ~ yearLast - year)
+				 ) %>%
+	filter(yearPerson>0) %>%
+	filter(city=="Unnan" | city=="Oki" | city=="Onan") 
+paCox$city <- factor(paCox$city)
+@
+
+<<>>=
+t_mat_total <- as.matrix(table(paCox$year))
+kable(t_mat_total,"latex",booktabs=T,linesep="",caption="Number of baseline subjects by year") %>%
+	add_header_above(c("Year","Number of subjects")) %>%
+	kable_styling(latex_options=c("hold_position"))
+@
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Baseline characteristics}
+	\begin{itemize}
+		\item The table shows the baseline characteristics of study subjects by event status.
+		\item A few baseline variables were significantly different between those with and without event. 
+	\end{itemize}
+\end{frame}	
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Baseline characteristics}
+<<>>=
+### Baseline table by PA outcome
+paTab1  <- paCox %>%
+	set_variable_labels(gender="Gender",age_cat2="Age",city="City of residence",smoke="Smoking status",drink="Drinking status",bone="Musculoskeletal disorders",license2="Driving license",meanSlope_1000="Land slope",komoinDis="Distance to Kominkan",busDen_1000="Bus stop density",interDen_1000="Intersection density",resi1000="Residential density") %>%
+	set_value_labels(paEvent=c("Yes"=1,"No"=0))
+kable_tableone <- function(t1mat,cap) {
+	kable(t1mat, "latex", booktabs=T, linesep="", caption=cap) %>%
+		add_header_above(c("Variables","Group of interest"=2,"test statistics"=2)) %>%
+		kable_styling(font_size=5) %>%
+		kable_styling(latex_options=c("HOLD_position"))
+}
+kable_tableone_all <- function(dfTab1,cap) {
+	listVars  <- c("gender","age","age_cat2","city","smoke","drink","BMI","bone","license2","meanSlope_1000","komoinDis","busDen_1000","interDen_1000","resi1000")
+	catVars  <- c("gender","age_cat2","city","smoke","drink","bone","license2")
+	cram  <- c("gender","smoke","drink","bone","license2")
+	t1  <- CreateTableOne(vars=listVars, strata="paEvent", data=dfTab1, factorVars=catVars)
+	t1mat  <- print(t1, cramVars=cram, printToggle=FALSE, noSpace=TRUE,varLabels=TRUE) 
+	kable_tableone(t1mat,cap)
+}
+kable_tableone_all(paTab1,"Baseline characteristics by incidence of physical inactivity")
+@
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Survival analysis}
+\begin{frame}
+	\frametitle{Survival curve by land slope}
+	\begin{itemize}
+		\item The graph shows KM survival curve of physical inactivity by binary category of land slope (low vs high).
+		\item There was no significant difference between those living in higher (blue) vs. lower (red) land slope areas. 
+	\end{itemize}
+
+<<>>=
+### Fit survival data using KM method - physical inactivity
+# add + sign to censored obs
+survObj <- Surv(time=paCox$yearPerson, event=paCox$paEvent)
+### function for KM curve komin distance category ################
+KM_plot_slopeBi <- function(dfCox){
+	kmSlopeBi <- survfit(survObj ~ slope1000_bi, data=dfCox)	
+	ggsurvplot(kmSlopeBi, data=dfCox, pval=TRUE)
+}
+KM_plot_slopeTer <- function(dfCox){
+	kmSlopeTer <- survfit(survObj ~ slope1000_ter, data=dfCox)	
+	ggsurvplot(kmSlopeTer, data=dfCox, pval=TRUE)
+}
+KM_plot_slopeQua <- function(dfCox){
+	kmSlopeQua <- survfit(survObj ~ slope1000_qua, data=dfCox)	
+	ggsurvplot(kmSlopeQua, data=dfCox, pval=TRUE)
+}
+###########################################################
+KM_plot_slopeBi(paCox)	
+#KM_plot_slopeTer(paCox)	
+#KM_plot_slopeQua(paCox)	
+@
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Survival curve by distance to community center}
+	\begin{itemize}
+		\item The graph shows KM survival curve of physical inactivity by binary category of distance to community center (close vs far).
+		\item There was a significantly higher survival rate among those living in farther (blue) distance to community center.
+	\end{itemize}
+
+<<>>=
+### function for KM curve by slop category ################
+KM_plot_kominBi <- function(dfCox){
+	kmKominBi <- survfit(survObj ~ kominDis_bi, data=dfCox)	
+	ggsurvplot(kmKominBi, data=dfCox, pval=TRUE)
+}
+KM_plot_kominTer <- function(dfCox){
+	kmKominTer <- survfit(survObj ~ kominDis_ter, data=dfCox)	
+	ggsurvplot(kmKominTer, data=dfCox, pval=TRUE)
+}
+KM_plot_kominQua <- function(dfCox){
+	kmKominQua <- survfit(survObj ~ kominDis_qua, data=dfCox)	
+	ggsurvplot(kmKominQua, data=dfCox, pval=TRUE)
+}
+###########################################################
+KM_plot_kominBi(paCox)	
+#KM_plot_kominTer(paCox)	
+#KM_plot_kominQua(paCox)	
+@
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Cox harzard proportional model - crude}
+	\begin{itemize}
+		\item As a trend was observed in KM survival curve by distance to community center, here applying cox hazard model.  
+		\item The graph shows a crude association between incidence of physical inactivity and distance to community center.
+	\end{itemize}
+<<>>=
+### fit cox regression model - construct model to find confounding
+survObj <- Surv(time=paCox$yearPerson, event=paCox$paEvent)
+cox1 <- coxph(survObj ~ kominDis_bi, data=paCox)
+ggforest(cox1, data=paCox)
+
+@
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Interpretation of KM curve and Cox model}
+	\begin{itemize}
+		\item From the KM survival curve and Cox model, \textbf{those living farther to a community center had 15\% lower risk of becoming physically inactive} compared to those living closer to a community center.
+		\item This was \textbf{opposite from the original hypothesis} that "\textit{\textbf{Living close to a community center which provides residents with various opportunities of health promoting and social networking activities would increase likelihoods of maintaining physical activity}}".
+		\item Next slide show the crude model for each covariate to examin each effect. 
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Cox proportional harzard model - crude for each covariate}
+<<results='asis'>>=
+### fit cox regression model - construct model to find confounding
+cox1 <- coxph(survObj ~ kominDis_bi, data=paCox)
+cox2 <- coxph(survObj ~ gender, data=paCox)
+cox3 <- coxph(survObj ~ age_cat2, data=paCox)
+cox4 <- coxph(survObj ~ city, data=paCox)
+#cox100 <- coxph(survObj ~ license2, data=paCox)
+cox5 <- coxph(survObj ~ smoke, data=paCox)
+cox6 <- coxph(survObj ~ drink, data=paCox)
+cox7 <- coxph(survObj ~ bone, data=paCox)
+cox8 <- coxph(survObj ~ cvd, data=paCox)
+cox9 <- coxph(survObj ~ stroke, data=paCox)
+stargazer::stargazer(cox1, cox2,cox3,cox4,#cox100,
+										 title="Crude model for each variable",
+										 align=TRUE, # align numeric values at the  decimal mark
+										 ci=TRUE,
+										 apply.coef=exp,
+										 p.auto=FALSE,
+										 dep.var.caption=c("Outcome: Incidence of physical inactivity"),
+										 dep.var.labels=c("Crude model for each variable"),
+										 covariate.labels=c("Distance to Kominkan(Far vs Close)","Gender(Female vs Male)","Age(70-79 vs 60-69)","Age(80+ vs 60-69)","City(Oki vs Unnan)", "City(Onan vs Unnan)"),
+										 #column.separate=c(1,1,1),
+										 #column.labels=c("m1","m2"),
+										 column.sep.width="1pt",
+										 keep.stat="n",
+										 font.size="tiny",
+										 no.space=TRUE
+										)
+
+@
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Cox proportional harzard model - crude for each covariate}
+<<results='asis'>>=
+### fit cox regression model - construct model to find confounding
+stargazer::stargazer(cox5,cox6,cox7,cox8,cox9,
+										 title="Crude model for each variable (Continued)",
+										 align=TRUE, # align numeric values at the  decimal mark
+										 ci=TRUE,
+										 apply.coef=exp,
+										 p.auto=FALSE,
+										 dep.var.caption=c("Outcome: Incidence of physical inactivity"),
+										 dep.var.labels=c("Crude model for each variable"),
+										 covariate.labels=c("Smoke(No vs Yes)","Drink(Occasionally vs Yes)","Drink(No vs Yes)","Musculoskeletal disorders(No vs Yes)","CVD(No vs Yes)","Stroke(No vs Yes)"),
+										 #column.separate=c(1,1,1),
+										 #column.labels=c("m1","m2"),
+										 column.sep.width="1pt",
+										 keep.stat="n",
+										 font.size="tiny",
+										 no.space=TRUE
+										)
+
+# for the next slide with graph
+knitr::opts_chunk$set(fig.height=4.5,results='hold')
+@
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Cox proportional harzard model - crude for each covariate}
+	\begin{itemize}
+		\item Some of the variables were significantly associated with event. 
+		\item Especially, city of residence was found to be strongly associated with event.
+		\item Living in Oki island had significantly lower risk of becoming physically inactive compared to the other cities.
+		\item Next slide shows crude to full model by controlling for all covariates.
+	\end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Cox proportional harzard model - crude to full model}
+<<results='asis'>>=
+### fit cox regression model - construct model to find confounding
+cox_f1 <- coxph(survObj ~ kominDis_bi, data=paCox)
+cox_f2 <- coxph(survObj ~ kominDis_bi+gender+age_cat2+city, data=paCox)
+cox_f3 <- coxph(survObj ~ kominDis_bi+gender+age_cat2+city+smoke+drink+bone, data=paCox)
+stargazer::stargazer(cox_f1, cox_f2,cox_f3,
+										 title="Crude to full model",
+										 align=TRUE, # align numeric values at the  decimal mark
+										 ci=TRUE,
+										 apply.coef=exp,
+										 p.auto=FALSE,
+										 dep.var.caption=c("Outcome: Incidence of physical inactivity"),
+										 dep.var.labels=c("Crude to full"),
+										 covariate.labels=c("Distance to Kominkan(Far vs Close)","Gender(Female vs Male)","Age(70-79 vs 60-69)","Age(80+ vs 60-69)","City(Oki vs Unnan)", "City(Onan vs Unnan)","Smoke(No vs Yes)","Drink(Occasionally vs Yes)","Drink(No vs Yes)","Musculoskeletal disorders(No vs Yes)"),
+										 #column.separate=c(1,1,1),
+										 #column.labels=c("m1","m2"),
+										 column.sep.width="1pt",
+										 keep.stat="n",
+										 font.size="tiny",
+										 no.space=TRUE
+										)
+
+@
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Cox proportional harzard model - full (BMI was added)}
+<<>>=
+### fit cox regression model - construct model to find confounding
+cox4 <- coxph(survObj ~ kominDis_bi+age_cat2+gender+city+smoke+drink+BMI+bone, data=paCox)
+ggforest(cox4, data=paCox)
+@
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Interpretation}
+	\begin{itemize}
+		\item Distance to komoinkan was significant variable, but \textbf{the effect disappeared when city of residence was adjusted}. 
+		\item Those living in Oki island had significantly lower risk of becoming physically inactive, \textbf{suggesting that distance to kominkan is relatively far in this area compared to the other areas}. 
+		\item Following graph shows the mean distance to kominkan by city to compare.
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Sensitivity analysis}
+\begin{frame}
+	\frametitle{Mean distance to community center by city}
+<<>>=
+kominDis_city<- paCox %>%
+	group_by(city) %>%
+	summarise(komoinDis = mean(komoinDis,na.rm=TRUE))
+ggplot(paCox,aes(x=city,y=komoinDis,fill=city)) +
+	geom_point()+
+	geom_bar(data=kominDis_city,stat="identity",alpha=0.3)
+@
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Sensitivity analysis by city}
+	\begin{itemize}
+		\item It was confirmed that \textbf{distance to kominkan was relatively farther among those living in Oki compared to the others in different cities}. 
+		\item Following tables are baseline characteristics of subjects by event status, but each table is for each city.
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Table 1 for Unnan city}
+<<>>=
+paTab1_unnan  <- paTab1 %>%
+	filter(city=="Unnan")
+kable_tableone_all(paTab1_unnan,"Unnan city: baseline characteristics by incidence of physical inactivity")
+@
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Table 1 for Oki Island}
+<<>>=
+paTab1_oki  <- paTab1 %>%
+	filter(city=="Oki")
+kable_tableone_all(paTab1_oki,"Oki Island: baseline characteristics by incidence of physical inactivity")
+@
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Table 1 for Onan town}
+<<>>=
+paTab1_onan  <- paTab1 %>%
+	filter(city=="Onan") 
+kable_tableone_all(paTab1_onan,"Onan town: baseline characteristics by incidence of physical inactivity")
+@
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Sensitivity analysis by city}
+	\begin{itemize}
+		\item Based on the tables, distance to a community center was no longer associated with event status in each city except in Onan town. 
+		\item In Onan town, distance to a community center was significantly lower among those with event (becoming physicall inactive) vs. without event. 
+		\item In Oki Island, bus stop density and residential density were significantly lower among those with event vs. without event.
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Next steps}
+\begin{frame}
+	\frametitle{Next steps}
+	\begin{itemize}
+		\item Re-run survival analysis for distance to a community center in Onan, bus stop density and residential density in Oki.
+		\item Consider other hidden individual level confoundings available from data.
+		\item Apply same analysis method on the outcome of BMI (focus on BMI decline, and incidence of underweight). *this is for a next paper.
+	\end{itemize}
+\end{frame}
+	
+\end{document}
